@@ -1,4 +1,6 @@
-# TimeseriesDelta
+===============
+TimeseriesDelta
+===============
 TimeseriesDelta is a Java MapRedue job which can be used to find outliers in timeseries data. It uses a SlidingWindow over a single pass of the data to find any data points greater than the specified threshold over the average value of the metric and writes those points out to HDFS. 
 
 ----
@@ -92,6 +94,3 @@ Usage:
 	# the following directory has all relevant points
 	$ hadoop fs -ls /home/user/example-1/high_user_activity 
 
-
-
-	
