@@ -1,7 +1,7 @@
 ===============
 TimeseriesDelta
 ===============
-TimeseriesDelta is a Java MapRedue job which can be used to find outliers in timeseries data. It uses a SlidingWindow over a single pass of the data to find any data points greater than the specified threshold over the average value of the metric and writes those points out to HDFS. 
+TimeseriesDelta is a Java MapReduce job which can be used to find outliers in time-series data. It uses a SlidingWindow over a single pass of the data to find any data points greater than the specified threshold over the average value of the metric and writes those points out to HDFS. 
 
 ----
 ### Build 
@@ -31,7 +31,7 @@ Comprises three top-level attributes and a list of attributes for each metric (u
 ##### Three top-level attributes:
 - `timeseries.file.delimiter`: the delimiter used to seperate fields in the input files
 - `timeseries.time.column`: the column index (zero-based) which contains the unix timestamp. 
-- `timeseries.compute.aliases`: a comma seperated list of unique aliases (at least one alias is required)
+- `timeseries.compute.aliases`: a comma separated list of unique aliases (at least one alias is required)
 	
 ##### For each unique *\<alias\>* 
 The following attributes are required, unless explicitly mentioned otherwise:
@@ -42,14 +42,14 @@ The following attributes are required, unless explicitly mentioned otherwise:
 - `timeseries.<alias>.window_size`: Sliding window width in seconds
 - `timeseries.<alias>.slide_size`: Sliding window increment in seconds
 - `timeseries.<alias>.alert_ratio`: The threshold to exceed before writing
-- `timeseries.<alias>.time_based`: Optional field, whose presence is used to indicate if the metric being computed should be the number of occurences or if the metric should be used as a rate per unit time.
+- `timeseries.<alias>.time_based`: Optional field, whose presence is used to indicate if the metric being computed should be the number of occurrences or if the metric should be used as a rate per unit time.
 		
 #### File Semantics
-Say our input is weblog data, where fields are tab-seperated and this is the structure of each line:
+Say our input is weblog data, where fields are tab-separated and this is the structure of each line:
 	
 	<unix_timestamp>	<ip-address>	<response-size-bytes>
 	
-##### Example 1: High User-Acitivity
+##### Example 1: High User-Activity
 If we want to find all (time, ip-address) pairs when the ip-address was mentioned in the logs 10 times more in 1hr than its average over course of a day, we would use the following config file:
 
 	# tab-delimited
@@ -68,7 +68,7 @@ If we want to find all (time, ip-address) pairs when the ip-address was mentione
 	timeseries.high_user_activity.metric_type = COUNT
 	
 	# indicate that we're looking for the average number 
-	# of occurences over the window
+	# of occurrences over the window
 	timeseries.high_user_activity.compute_type = AVG
 	
 	# indicate the average should be a time-based rate
